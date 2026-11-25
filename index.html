@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Saif Ali | Creative Freelancer & Digital Services</title>
-
-<meta name="description" content="Saif Ali is a creative freelancer from Lahore, Pakistan, offering graphic design, video editing, social media marketing and digital creative services.">
-
+<meta name="description" content="Saif Ali, creative freelancer from Lahore, Pakistan. Graphic design, video editing, social media marketing and digital creative services.">
 <meta name="keywords" content="Saif Ali, Freelancer, Graphic Designer, Video Editor, Social Media Marketing, SA Creative Studio">
-
 <meta name="author" content="Saif Ali">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   GLOBAL SETTINGS
-========================= */
-
 :root {
     --bg: #080b14;
     --card: #101626;
@@ -32,7 +22,7 @@
     --muted: #a1abc0;
     --purple: #9b5cff;
     --cyan: #28d9e8;
-    --border: rgba(255,255,255,0.09);
+    --border: rgba(255,255,255,.09);
 }
 
 * {
@@ -79,21 +69,17 @@ section {
     margin-bottom: 14px;
 }
 
-.section-title h2 span {
+.section-title h2 span,
+.gradient-text {
     background: linear-gradient(90deg, var(--purple), var(--cyan));
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .section-title p {
     color: var(--muted);
     line-height: 1.8;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg, var(--purple), var(--cyan));
-    -webkit-background-clip: text;
-    color: transparent;
 }
 
 .btn {
@@ -103,14 +89,20 @@ section {
     background: linear-gradient(100deg, var(--purple), #637cff);
     color: white;
     font-weight: 700;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
-    transition: 0.3s;
+    transition: .3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(155,92,255,0.3);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 0 12px rgba(155,92,255,.7),
+        0 0 28px rgba(40,217,232,.35);
+}
+
+.btn:active {
+    transform: scale(.96);
 }
 
 .btn-outline {
@@ -123,17 +115,13 @@ section {
     background: var(--purple);
 }
 
-/* =========================
-   BACKGROUND EFFECTS
-========================= */
-
 .background-glow {
     position: fixed;
     width: 350px;
     height: 350px;
     border-radius: 50%;
     filter: blur(130px);
-    opacity: 0.13;
+    opacity: .13;
     z-index: -1;
     pointer-events: none;
 }
@@ -150,9 +138,7 @@ section {
     bottom: 5%;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NAVIGATION */
 
 header {
     position: fixed;
@@ -160,7 +146,7 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    background: rgba(8,11,20,0.85);
+    background: rgba(8,11,20,.85);
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
 }
@@ -193,11 +179,13 @@ header {
     color: #c5ccda;
     font-size: 13px;
     font-weight: 600;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .nav-links a:hover {
     color: var(--cyan);
+    text-shadow: 0 0 8px rgba(40,217,232,.8),
+                 0 0 18px rgba(40,217,232,.4);
 }
 
 .menu-btn {
@@ -209,9 +197,7 @@ header {
     cursor: pointer;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+/* HERO */
 
 .hero {
     min-height: 100vh;
@@ -222,7 +208,7 @@ header {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 1.3fr .7fr;
     gap: 50px;
     align-items: center;
 }
@@ -230,8 +216,8 @@ header {
 .badge {
     display: inline-block;
     padding: 9px 15px;
-    border: 1px solid rgba(40,217,232,0.3);
-    background: rgba(40,217,232,0.06);
+    border: 1px solid rgba(40,217,232,.3);
+    background: rgba(40,217,232,.06);
     color: var(--cyan);
     border-radius: 30px;
     font-size: 12px;
@@ -239,7 +225,7 @@ header {
 }
 
 .hero h1 {
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(40px,6vw,72px);
     font-weight: 900;
     line-height: 1.12;
     letter-spacing: -2px;
@@ -247,7 +233,7 @@ header {
 
 .hero h2 {
     color: var(--muted);
-    font-size: clamp(18px, 2vw, 23px);
+    font-size: clamp(18px,2vw,23px);
     margin: 20px 0;
     font-weight: 500;
 }
@@ -268,7 +254,7 @@ header {
     max-width: 360px;
     min-height: 360px;
     margin: auto;
-    background: linear-gradient(145deg, #171e35, #101626);
+    background: linear-gradient(145deg,#171e35,#101626);
     border: 1px solid var(--border);
     border-radius: 30px;
     display: flex;
@@ -285,9 +271,9 @@ header {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    background: linear-gradient(135deg,var(--purple),var(--cyan));
     filter: blur(70px);
-    opacity: 0.4;
+    opacity: .4;
 }
 
 .avatar {
@@ -295,15 +281,15 @@ header {
     width: 175px;
     height: 175px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    background: linear-gradient(135deg,var(--purple),var(--cyan));
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 65px;
     font-weight: 900;
     color: white;
-    border: 7px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 60px rgba(155,92,255,0.3);
+    border: 7px solid rgba(255,255,255,.1);
+    box-shadow: 0 0 60px rgba(155,92,255,.3);
 }
 
 .hero-card-label {
@@ -315,13 +301,11 @@ header {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
+    0%,100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
 }
 
-/* =========================
-   ABOUT SECTION
-========================= */
+/* ABOUT */
 
 .about-grid {
     display: grid;
@@ -372,13 +356,11 @@ header {
     font-size: 14px;
 }
 
-/* =========================
-   SKILLS
-========================= */
+/* SKILLS */
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 20px;
 }
 
@@ -387,12 +369,6 @@ header {
     border: 1px solid var(--border);
     padding: 25px;
     border-radius: 15px;
-    transition: 0.3s;
-}
-
-.skill-card:hover {
-    transform: translateY(-7px);
-    border-color: var(--purple);
 }
 
 .skill-card h3 {
@@ -413,27 +389,19 @@ header {
     margin-bottom: 15px;
 }
 
-/* =========================
-   SERVICES
-========================= */
+/* SERVICES */
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 22px;
 }
 
 .service-card {
-    background: linear-gradient(145deg, var(--card), #0d1423);
+    background: linear-gradient(145deg,var(--card),#0d1423);
     border: 1px solid var(--border);
     padding: 30px;
     border-radius: 17px;
-    transition: 0.3s;
-}
-
-.service-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--cyan);
 }
 
 .service-icon {
@@ -452,13 +420,11 @@ header {
     line-height: 1.8;
 }
 
-/* =========================
-   PORTFOLIO
-========================= */
+/* PORTFOLIO */
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 25px;
 }
 
@@ -467,12 +433,6 @@ header {
     border: 1px solid var(--border);
     border-radius: 17px;
     overflow: hidden;
-    transition: 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-7px);
-    border-color: var(--purple);
 }
 
 .project-visual {
@@ -482,7 +442,7 @@ header {
     align-items: center;
     text-align: center;
     padding: 30px;
-    background: linear-gradient(135deg, #251447, #10303e);
+    background: linear-gradient(135deg,#251447,#10303e);
 }
 
 .project-visual h3 {
@@ -491,16 +451,16 @@ header {
     letter-spacing: 1px;
 }
 
-.project-visual.visual-two {
-    background: linear-gradient(135deg, #142747, #252052);
+.visual-two {
+    background: linear-gradient(135deg,#142747,#252052);
 }
 
-.project-visual.visual-three {
-    background: linear-gradient(135deg, #361a40, #153c47);
+.visual-three {
+    background: linear-gradient(135deg,#361a40,#153c47);
 }
 
-.project-visual.visual-four {
-    background: linear-gradient(135deg, #172a3b, #31204d);
+.visual-four {
+    background: linear-gradient(135deg,#172a3b,#31204d);
 }
 
 .project-details {
@@ -521,15 +481,13 @@ header {
     display: inline-block;
     font-size: 11px;
     color: var(--cyan);
-    background: rgba(40,217,232,0.08);
+    background: rgba(40,217,232,.08);
     padding: 7px 11px;
     border-radius: 20px;
     margin-top: 15px;
 }
 
-/* =========================
-   SA CREATIVE STUDIO
-========================= */
+/* STUDIO */
 
 .studio-box {
     text-align: center;
@@ -537,13 +495,13 @@ header {
     border: 1px solid var(--border);
     border-radius: 25px;
     background:
-    radial-gradient(circle at top right, rgba(155,92,255,0.18), transparent 40%),
-    radial-gradient(circle at bottom left, rgba(40,217,232,0.12), transparent 40%),
-    var(--card);
+        radial-gradient(circle at top right,rgba(155,92,255,.18),transparent 40%),
+        radial-gradient(circle at bottom left,rgba(40,217,232,.12),transparent 40%),
+        var(--card);
 }
 
 .studio-logo {
-    font-size: clamp(35px, 6vw, 55px);
+    font-size: clamp(35px,6vw,55px);
     font-weight: 900;
     letter-spacing: -2px;
     margin-bottom: 15px;
@@ -557,13 +515,11 @@ header {
     font-size: 14px;
 }
 
-/* =========================
-   WHY CHOOSE ME
-========================= */
+/* WHY CHOOSE ME */
 
 .why-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 20px;
 }
 
@@ -585,13 +541,11 @@ header {
     line-height: 1.8;
 }
 
-/* =========================
-   CONTACT
-========================= */
+/* CONTACT */
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: .8fr 1.2fr;
     gap: 30px;
 }
 
@@ -647,11 +601,13 @@ header {
     color: white;
     outline: none;
     font-family: inherit;
+    transition: .3s;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--purple);
+    box-shadow: 0 0 12px rgba(155,92,255,.25);
 }
 
 .contact-form textarea {
@@ -663,9 +619,7 @@ header {
     width: 100%;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
     border-top: 1px solid var(--border);
@@ -679,14 +633,12 @@ footer p {
     line-height: 1.8;
 }
 
-/* =========================
-   SCROLL ANIMATIONS
-========================= */
+/* SCROLL REVEAL */
 
 .reveal {
     opacity: 0;
     transform: translateY(35px);
-    transition: 0.8s ease;
+    transition: .8s ease;
 }
 
 .reveal.active {
@@ -694,9 +646,7 @@ footer p {
     transform: translateY(0);
 }
 
-/* =========================
-   BACK TO TOP
-========================= */
+/* BACK TO TOP */
 
 .top-btn {
     position: fixed;
@@ -707,19 +657,138 @@ footer p {
     border: none;
     border-radius: 50%;
     color: white;
-    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    background: linear-gradient(135deg,var(--purple),var(--cyan));
     font-size: 20px;
     cursor: pointer;
     display: none;
     z-index: 500;
+    transition: .3s;
 }
 
-/* =========================
-   RESPONSIVE DESIGN
-========================= */
+.top-btn:hover {
+    box-shadow: 0 0 20px var(--cyan);
+    transform: translateY(-4px);
+}
 
-@media(max-width: 900px) {
+/* =================================
+   PREMIUM GLOW EFFECTS
+================================= */
 
+.skill-card,
+.service-card,
+.project-card,
+.why-card,
+.about-box,
+.info-item,
+.contact-info,
+.contact-form,
+.studio-box,
+.hero-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+/* Glow overlay */
+
+.skill-card::before,
+.service-card::before,
+.project-card::before,
+.why-card::before,
+.about-box::before,
+.info-item::before,
+.contact-info::before,
+.contact-form::before,
+.studio-box::before,
+.hero-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        250px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+        rgba(155,92,255,.23),
+        rgba(40,217,232,.10) 40%,
+        transparent 75%
+    );
+    transition: opacity .3s ease;
+}
+
+.skill-card:hover::before,
+.service-card:hover::before,
+.project-card:hover::before,
+.why-card:hover::before,
+.about-box:hover::before,
+.info-item:hover::before,
+.contact-info:hover::before,
+.contact-form:hover::before,
+.studio-box:hover::before,
+.hero-card:hover::after {
+    opacity: 1;
+}
+
+/* Card border and glow */
+
+.skill-card:hover,
+.service-card:hover,
+.project-card:hover,
+.why-card:hover,
+.about-box:hover,
+.info-item:hover,
+.contact-info:hover,
+.contact-form:hover,
+.studio-box:hover,
+.hero-card:hover {
+    border-color: rgba(40,217,232,.65);
+    box-shadow:
+        0 0 10px rgba(40,217,232,.20),
+        0 0 25px rgba(155,92,255,.20),
+        inset 0 0 15px rgba(40,217,232,.06);
+    transform: translateY(-6px);
+}
+
+/* Portfolio glow */
+
+.project-card:hover {
+    box-shadow:
+        0 0 15px rgba(155,92,255,.3),
+        0 0 35px rgba(40,217,232,.18);
+}
+
+/* Heading glow */
+
+.gradient-text:hover {
+    filter: drop-shadow(0 0 12px rgba(155,92,255,.7));
+}
+
+/* Click feedback */
+
+.skill-card:active,
+.service-card:active,
+.project-card:active,
+.why-card:active {
+    transform: scale(.98);
+}
+
+/* Keyboard accessibility */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
     .nav-links {
         gap: 15px;
     }
@@ -729,20 +798,18 @@ footer p {
     }
 
     .hero-content {
-        grid-template-columns: 1fr 0.7fr;
+        grid-template-columns: 1fr .7fr;
         gap: 25px;
     }
 
     .skills-grid,
     .services-grid,
     .why-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
     }
-
 }
 
-@media(max-width: 650px) {
-
+@media(max-width:650px) {
     .container {
         width: 90%;
     }
@@ -836,14 +903,43 @@ footer p {
     .section-title {
         margin-bottom: 35px;
     }
-
 }
 
-@media(prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+@media(hover:none), (pointer:coarse) {
+    .skill-card,
+    .service-card,
+    .project-card,
+    .why-card,
+    .about-box,
+    .info-item,
+    .contact-info,
+    .contact-form,
+    .studio-box,
+    .hero-card {
+        transform: none;
+    }
+
+    .skill-card:hover,
+    .service-card:hover,
+    .project-card:hover,
+    .why-card:hover,
+    .about-box:hover,
+    .info-item:hover,
+    .contact-info:hover,
+    .contact-form:hover,
+    .studio-box:hover,
+    .hero-card:hover {
+        transform: none;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *::before,
+    *::after {
         scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
     }
 
     .reveal {
@@ -851,7 +947,6 @@ footer p {
         transform: none;
     }
 }
-
 </style>
 </head>
 
@@ -860,22 +955,14 @@ footer p {
 <div class="background-glow glow-one"></div>
 <div class="background-glow glow-two"></div>
 
-<!-- NAVIGATION -->
-
 <header>
-
 <nav class="navbar container">
 
-<a href="#home" class="logo">
-SA<span>.</span>
-</a>
+<a href="#home" class="logo">SA<span>.</span></a>
 
-<button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">
-☰
-</button>
+<button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">☰</button>
 
 <ul class="nav-links" id="navLinks">
-
 <li><a href="#home">Home</a></li>
 <li><a href="#about">About</a></li>
 <li><a href="#skills">Skills</a></li>
@@ -883,34 +970,23 @@ SA<span>.</span>
 <li><a href="#portfolio">Portfolio</a></li>
 <li><a href="#studio">Studio</a></li>
 <li><a href="#contact">Contact</a></li>
-
 </ul>
 
 </nav>
-
 </header>
-
 
 <!-- HERO -->
 
 <section class="hero" id="home">
-
 <div class="container hero-content">
 
 <div class="hero-text reveal">
 
-<div class="badge">
-CREATIVE FREELANCER | LAHORE, PAKISTAN
-</div>
+<div class="badge">CREATIVE FREELANCER | LAHORE, PAKISTAN</div>
 
-<h1>
-Hello, I'm <br>
-<span class="gradient-text">Saif Ali.</span>
-</h1>
+<h1>Hello, I'm <br><span class="gradient-text">Saif Ali.</span></h1>
 
-<h2>
-Creative Freelancer & Digital Services Professional
-</h2>
+<h2>Creative Freelancer & Digital Services Professional</h2>
 
 <p>
 I am passionate about digital creativity, graphic designing,
@@ -921,76 +997,38 @@ engaging content and digital solutions.
 </p>
 
 <div class="hero-buttons">
-
-<a href="#contact" class="btn">
-Let's Work Together
-</a>
-
-<a href="#portfolio" class="btn btn-outline">
-Explore My Work
-</a>
-
+<a href="#contact" class="btn">Let's Work Together</a>
+<a href="#portfolio" class="btn btn-outline">Explore My Work</a>
 </div>
 
 </div>
-
 
 <div class="hero-card">
-
 <div class="avatar">SA</div>
-
-<div class="hero-card-label">
-CREATIVITY • DESIGN • DIGITAL
+<div class="hero-card-label">CREATIVITY • DESIGN • DIGITAL</div>
 </div>
 
 </div>
-
-</div>
-
 </section>
-
 
 <!-- ABOUT -->
 
 <section id="about">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>About <span>Me</span></h2>
-
 <p>Get to know me and my creative journey.</p>
-
 </div>
-
 
 <div class="about-grid">
 
 <div class="about-box reveal">
-
 <h3>Who Am I?</h3>
-
-<p>
-My name is Saif Ali. I am a creative freelancer
-based in Lahore, Pakistan.
-</p>
-
-<p>
-I have an interest in graphic design, video editing,
-social media content creation, digital marketing
-and online business promotion.
-</p>
-
-<p>
-I believe in creativity, continuous learning,
-professional communication and delivering quality work.
-My goal is to improve my skills and help businesses
-communicate their ideas through digital creativity.
-</p>
-
+<p>My name is Saif Ali. I am a creative freelancer based in Lahore, Pakistan.</p>
+<p>I have an interest in graphic design, video editing, social media content creation, digital marketing and online business promotion.</p>
+<p>I believe in creativity, continuous learning, professional communication and delivering quality work. My goal is to improve my skills and help businesses communicate their ideas through digital creativity.</p>
 </div>
-
 
 <div class="info-list reveal">
 
@@ -1020,28 +1058,19 @@ communicate their ideas through digital creativity.
 </div>
 
 </div>
-
 </div>
-
 </div>
-
 </section>
-
 
 <!-- SKILLS -->
 
 <section id="skills">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>My <span>Skills</span></h2>
-
 <p>Creative and digital skills I am developing.</p>
-
 </div>
-
 
 <div class="skills-grid">
 
@@ -1082,26 +1111,18 @@ communicate their ideas through digital creativity.
 </div>
 
 </div>
-
 </div>
-
 </section>
-
 
 <!-- SERVICES -->
 
 <section id="services">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>My <span>Services</span></h2>
-
 <p>Digital services for individuals, creators and businesses.</p>
-
 </div>
-
 
 <div class="services-grid">
 
@@ -1160,111 +1181,72 @@ communicate their ideas through digital creativity.
 </div>
 
 </div>
-
 </div>
-
 </section>
-
 
 <!-- PORTFOLIO -->
 
 <section id="portfolio">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>My <span>Portfolio</span></h2>
-
 <p>Creative sample concepts and design directions.</p>
-
 </div>
-
 
 <div class="portfolio-grid">
 
 <div class="project-card reveal">
-
 <div class="project-visual">
 <h3>NOORÉ<br>FASHION</h3>
 </div>
-
 <div class="project-details">
 <h3>Fashion Brand Promotion</h3>
-<p>
-A sample fashion brand concept featuring promotional
-design direction and social media presentation.
-</p>
+<p>A sample fashion brand concept featuring promotional design direction and social media presentation.</p>
 <span class="project-tag">SAMPLE CONCEPT</span>
 </div>
-
 </div>
 
-
 <div class="project-card reveal">
-
 <div class="project-visual visual-two">
 <h3>CREATIVE<br>DESIGN</h3>
 </div>
-
 <div class="project-details">
 <h3>Social Media Graphics</h3>
-<p>
-A sample visual concept for social media posts,
-creative graphics and digital communication.
-</p>
+<p>A sample visual concept for social media posts, creative graphics and digital communication.</p>
 <span class="project-tag">SAMPLE CONCEPT</span>
 </div>
-
 </div>
 
-
 <div class="project-card reveal">
-
 <div class="project-visual visual-three">
 <h3>VIDEO<br>STUDIO</h3>
 </div>
-
 <div class="project-details">
 <h3>Video Content Concept</h3>
-<p>
-A sample creative direction for short videos,
-reels and promotional content.
-</p>
+<p>A sample creative direction for short videos, reels and promotional content.</p>
 <span class="project-tag">SAMPLE CONCEPT</span>
 </div>
-
 </div>
 
-
 <div class="project-card reveal">
-
 <div class="project-visual visual-four">
 <h3>DIGITAL<br>PROMOTION</h3>
 </div>
-
 <div class="project-details">
 <h3>Digital Brand Promotion</h3>
-<p>
-A sample campaign concept for digital advertising
-and online brand awareness.
-</p>
+<p>A sample campaign concept for digital advertising and online brand awareness.</p>
 <span class="project-tag">SAMPLE CONCEPT</span>
 </div>
-
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- SA CREATIVE STUDIO -->
+<!-- STUDIO -->
 
 <section id="studio">
-
 <div class="container">
 
 <div class="studio-box reveal">
@@ -1282,31 +1264,21 @@ designing, video editing, social media content, brand promotion
 and digital solutions.
 </p>
 
-<a href="#contact" class="btn">
-Connect With Me
-</a>
+<a href="#contact" class="btn">Connect With Me</a>
 
 </div>
-
 </div>
-
 </section>
-
 
 <!-- WHY CHOOSE ME -->
 
 <section id="why">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>Why <span>Work With Me?</span></h2>
-
 <p>My approach to creative and digital work.</p>
-
 </div>
-
 
 <div class="why-grid">
 
@@ -1341,38 +1313,24 @@ Connect With Me
 </div>
 
 </div>
-
 </div>
-
 </section>
-
 
 <!-- CONTACT -->
 
 <section id="contact">
-
 <div class="container">
 
 <div class="section-title reveal">
-
 <h2>Contact <span>Me</span></h2>
-
 <p>Have a project or creative idea? Let's connect.</p>
-
 </div>
-
 
 <div class="contact-grid">
 
 <div class="contact-info reveal">
-
 <h3>Let's Connect!</h3>
-
-<p>
-I am open to discussing creative projects,
-digital services and collaboration opportunities.
-Feel free to contact me through email.
-</p>
+<p>I am open to discussing creative projects, digital services and collaboration opportunities. Feel free to contact me through email.</p>
 
 <div class="contact-detail">
 <strong>NAME</strong>
@@ -1386,86 +1344,40 @@ Lahore, Pakistan
 
 <div class="contact-detail">
 <strong>EMAIL</strong>
-<a href="mailto:saifali0011011@gmail.com">
-saifali0011011@gmail.com
-</a>
+<a href="mailto:saifali0011011@gmail.com">saifali0011011@gmail.com</a>
 </div>
 
 <div class="contact-detail">
 <strong>BRAND</strong>
 SA Creative Studio
 </div>
-
 </div>
-
 
 <form class="contact-form reveal" id="contactForm">
 
-<input
-type="text"
-id="name"
-placeholder="Your Name"
-required
->
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<input type="text" id="subject" placeholder="Subject" required>
+<textarea id="message" placeholder="Write your message..." required></textarea>
 
-<input
-type="email"
-id="email"
-placeholder="Your Email"
-required
->
-
-<input
-type="text"
-id="subject"
-placeholder="Subject"
-required
->
-
-<textarea
-id="message"
-placeholder="Write your message..."
-required
-></textarea>
-
-<button type="submit" class="btn">
-Send Message →
-</button>
+<button type="submit" class="btn">Send Message →</button>
 
 </form>
 
 </div>
-
 </div>
-
 </section>
-
 
 <!-- FOOTER -->
 
 <footer>
-
 <div class="container">
-
-<p>
-© <span id="year"></span> Saif Ali | SA Creative Studio.
-</p>
-
-<p>
-Designed with creativity and passion.
-</p>
-
+<p>© <span id="year"></span> Saif Ali | SA Creative Studio.</p>
+<p>Designed with creativity and passion.</p>
 </div>
-
 </footer>
 
-
-<button class="top-btn" id="topBtn" aria-label="Back to top">
-↑
-</button>
-
-
-<!-- JAVASCRIPT -->
+<button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
 
 <script>
 
@@ -1475,92 +1387,52 @@ const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
 menuBtn.addEventListener("click", () => {
-
     navLinks.classList.toggle("show");
-
-    menuBtn.textContent =
-    navLinks.classList.contains("show") ? "✕" : "☰";
-
+    menuBtn.textContent = navLinks.classList.contains("show") ? "✕" : "☰";
 });
 
-
-// CLOSE MENU AFTER CLICK
+// CLOSE MOBILE MENU
 
 document.querySelectorAll(".nav-links a").forEach(link => {
-
     link.addEventListener("click", () => {
-
         navLinks.classList.remove("show");
         menuBtn.textContent = "☰";
-
     });
-
 });
 
-
-// SCROLL REVEAL ANIMATION
+// SCROLL REVEAL
 
 const revealElements = document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver((entries) => {
-
+const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-
         if(entry.isIntersecting) {
-
             entry.target.classList.add("active");
-
         }
-
     });
+}, { threshold: 0.12 });
 
-}, {
-    threshold: 0.12
-});
+revealElements.forEach(element => observer.observe(element));
 
-revealElements.forEach(element => {
-    observer.observe(element);
-});
-
-
-// BACK TO TOP BUTTON
+// BACK TO TOP
 
 const topBtn = document.getElementById("topBtn");
 
 window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 400) {
-
-        topBtn.style.display = "block";
-
-    } else {
-
-        topBtn.style.display = "none";
-
-    }
-
+    topBtn.style.display = window.scrollY > 400 ? "block" : "none";
 });
 
 topBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+// COPYRIGHT YEAR
 
-// AUTOMATIC COPYRIGHT YEAR
-
-document.getElementById("year").textContent =
-new Date().getFullYear();
-
+document.getElementById("year").textContent = new Date().getFullYear();
 
 // CONTACT FORM
 
 document.getElementById("contactForm").addEventListener("submit", function(e) {
-
     e.preventDefault();
 
     const name = document.getElementById("name").value.trim();
@@ -1571,18 +1443,45 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     const emailAddress = "saifali0011011@gmail.com";
 
     const body =
-    "Name: " + name + "\n" +
-    "Email: " + email + "\n\n" +
-    "Message:\n" + message;
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Message:\n" + message;
 
     const mailtoLink =
-    "mailto:" + emailAddress +
-    "?subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body);
+        "mailto:" + emailAddress +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
 
     window.location.href = mailtoLink;
-
 });
+
+// PREMIUM MOUSE FOLLOWING GLOW
+
+const glowTargets = document.querySelectorAll(
+    ".skill-card, .service-card, .project-card, .why-card, .about-box, .info-item, .contact-info, .contact-form, .studio-box, .hero-card"
+);
+
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+if (finePointer) {
+
+    glowTargets.forEach(card => {
+
+        card.addEventListener("pointermove", function(e) {
+
+            const rect = card.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty("--mouse-x", x + "px");
+            card.style.setProperty("--mouse-y", y + "px");
+
+        });
+
+    });
+
+}
 
 </script>
 
