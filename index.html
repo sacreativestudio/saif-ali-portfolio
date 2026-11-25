@@ -31,9 +31,9 @@
       --bg-primary: #07070d;
       --bg-secondary: #0d0e17;
       --bg-card: rgba(19, 21, 34, 0.65);
-      --bg-card-hover: rgba(26, 29, 46, 0.85);
+      --bg-card-hover: rgba(26, 29, 46, 0.88);
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(139, 92, 246, 0.45);
+      --border-accent: rgba(139, 92, 246, 0.5);
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -42,12 +42,15 @@
       --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
       --gradient-glow: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.08), transparent 70%);
       --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --shadow-glow: 0 0 36px rgba(139, 92, 246, 0.32), 0 0 18px rgba(6, 182, 212, 0.18);
       --nav-height: 76px;
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 10px;
       --transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      --pointer-x: 50vw;
+      --pointer-y: 50vh;
+      --pointer-active: 0;
     }
 
     *, *::before, *::after {
@@ -92,6 +95,29 @@
 
     button, input, textarea {
       font-family: inherit;
+    }
+
+    /* Global Mouse / Finger Glowing Aura */
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 900;
+      transform: translate3d(calc(var(--pointer-x) - 190px), calc(var(--pointer-y) - 190px), 0);
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.22) 0%,
+        rgba(6, 182, 212, 0.13) 38%,
+        transparent 70%
+      );
+      filter: blur(18px);
+      opacity: var(--pointer-active);
+      transition: opacity 0.25s ease;
+      will-change: transform, opacity;
     }
 
     /* Preloader */
@@ -240,6 +266,14 @@
       background: rgba(139, 92, 246, 0.12);
       border: 1px solid rgba(139, 92, 246, 0.28);
       margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .section-badge:hover,
+    .section-badge:active {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.45), 0 0 10px rgba(6, 182, 212, 0.25);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
     }
 
     .section-title {
@@ -259,8 +293,11 @@
       font-size: 1.05rem;
     }
 
-    /* Glass Card */
+    /* Glass Card with Pointer Spotlight Glow */
     .glass-card {
+      --card-x: 50%;
+      --card-y: 50%;
+      --card-glow-opacity: 0;
       background: var(--bg-card);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -268,9 +305,34 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-card);
       transition: var(--transition);
+      position: relative;
     }
 
-    .glass-card:hover {
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        340px circle at var(--card-x) var(--card-y),
+        rgba(139, 92, 246, 0.22),
+        rgba(6, 182, 212, 0.13) 45%,
+        transparent 75%
+      );
+      opacity: var(--card-glow-opacity);
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glass-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass-card:hover,
+    .glass-card.pointer-glowing {
+      --card-glow-opacity: 1;
       background: var(--bg-card-hover);
       border-color: var(--border-accent);
       transform: translateY(-5px);
@@ -300,9 +362,10 @@
       box-shadow: 0 10px 25px -6px rgba(139, 92, 246, 0.55);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover,
+    .btn-primary:active {
       transform: translateY(-2px);
-      box-shadow: 0 14px 32px -4px rgba(6, 182, 212, 0.55);
+      box-shadow: 0 14px 34px 0 rgba(139, 92, 246, 0.65), 0 0 22px rgba(6, 182, 212, 0.55);
     }
 
     .btn-secondary {
@@ -312,10 +375,12 @@
       backdrop-filter: blur(10px);
     }
 
-    .btn-secondary:hover {
+    .btn-secondary:hover,
+    .btn-secondary:active {
       background: rgba(255, 255, 255, 0.09);
       border-color: var(--accent-cyan);
       transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(6, 182, 212, 0.35), 0 0 14px rgba(139, 92, 246, 0.25);
     }
 
     /* Navbar */
@@ -351,6 +416,12 @@
       gap: 0.75rem;
       font-weight: 800;
       font-size: 1.15rem;
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover .brand-monogram {
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.7), 0 0 14px rgba(6, 182, 212, 0.5);
+      transform: scale(1.04);
     }
 
     .brand-monogram {
@@ -367,6 +438,7 @@
       letter-spacing: 0.02em;
       box-shadow: 0 6px 18px rgba(139, 92, 246, 0.4);
       flex-shrink: 0;
+      transition: var(--transition);
     }
 
     .brand-text-wrap {
@@ -407,9 +479,11 @@
     }
 
     .nav-link:hover,
+    .nav-link:active,
     .nav-link.active {
       color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(139, 92, 246, 0.12);
+      box-shadow: 0 0 16px rgba(139, 92, 246, 0.28);
     }
 
     .nav-link.active::after {
@@ -440,6 +514,7 @@
 
     .mobile-toggle:hover {
       border-color: var(--accent-purple);
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.35);
     }
 
     /* Mobile Drawer */
@@ -506,6 +581,12 @@
       font-size: 0.84rem;
       font-weight: 600;
       margin-bottom: 1.35rem;
+      transition: var(--transition);
+    }
+
+    .hero-pill:hover {
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.35);
+      border-color: var(--accent-cyan);
     }
 
     .status-dot {
@@ -588,6 +669,15 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .hero-meta-item:hover {
+      color: var(--text-primary);
+      background: rgba(139, 92, 246, 0.12);
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
     }
 
     .hero-meta-item i {
@@ -596,7 +686,7 @@
       height: 18px;
     }
 
-    /* Animated Hero Visual Card (No broken local images) */
+    /* Animated Hero Visual Card */
     .hero-visual {
       position: relative;
       display: flex;
@@ -605,6 +695,9 @@
     }
 
     .studio-showcase {
+      --card-x: 50%;
+      --card-y: 50%;
+      --card-glow-opacity: 0;
       position: relative;
       width: 100%;
       max-width: 430px;
@@ -618,6 +711,30 @@
       flex-direction: column;
       justify-content: space-between;
       overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .studio-showcase:hover,
+    .studio-showcase.pointer-glowing {
+      --card-glow-opacity: 1;
+      box-shadow: 0 30px 65px -15px rgba(0, 0, 0, 0.8), 0 0 55px rgba(139, 92, 246, 0.42), 0 0 28px rgba(6, 182, 212, 0.28);
+      border-color: rgba(6, 182, 212, 0.6);
+    }
+
+    .studio-showcase::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        300px circle at var(--card-x) var(--card-y),
+        rgba(6, 182, 212, 0.22),
+        rgba(139, 92, 246, 0.16) 45%,
+        transparent 75%
+      );
+      opacity: var(--card-glow-opacity);
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .studio-showcase::before {
@@ -702,7 +819,6 @@
       text-align: center;
       position: relative;
       z-index: 2;
-      my: auto;
     }
 
     .emblem-box {
@@ -719,6 +835,12 @@
       color: #fff;
       box-shadow: 0 18px 36px rgba(139, 92, 246, 0.45);
       animation: floatCard 5s ease-in-out infinite;
+      transition: var(--transition);
+    }
+
+    .studio-showcase:hover .emblem-box {
+      box-shadow: 0 0 42px rgba(139, 92, 246, 0.75), 0 0 24px rgba(6, 182, 212, 0.55);
+      transform: scale(1.06);
     }
 
     @keyframes floatCard {
@@ -756,6 +878,14 @@
       font-size: 0.8rem;
       font-weight: 500;
       color: #e2e8f0;
+      transition: var(--transition);
+    }
+
+    .mini-pill:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.12);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.3);
+      transform: translateY(-2px);
     }
 
     .mini-pill i {
@@ -814,6 +944,14 @@
       display: grid;
       place-items: center;
       margin-bottom: 0.2rem;
+      transition: var(--transition);
+    }
+
+    .detail-card:hover .detail-icon,
+    .detail-card.pointer-glowing .detail-icon {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
     }
 
     .detail-label {
@@ -848,7 +986,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.9rem;
-      position: relative;
       overflow: hidden;
     }
 
@@ -863,9 +1000,11 @@
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.35s ease;
+      z-index: 3;
     }
 
-    .service-card:hover::after {
+    .service-card:hover::after,
+    .service-card.pointer-glowing::after {
       transform: scaleX(1);
     }
 
@@ -881,10 +1020,12 @@
       transition: var(--transition);
     }
 
-    .service-card:hover .service-icon {
+    .service-card:hover .service-icon,
+    .service-card.pointer-glowing .service-icon {
       background: var(--gradient-primary);
       color: #ffffff;
       transform: scale(1.06);
+      box-shadow: 0 0 22px rgba(139, 92, 246, 0.55), 0 0 12px rgba(6, 182, 212, 0.4);
     }
 
     .service-card h3 {
@@ -898,7 +1039,7 @@
       line-height: 1.6;
     }
 
-    /* Skills Section (Visual Categories & Animated Focus Bars — No Invented Percentages) */
+    /* Skills Section */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
@@ -929,6 +1070,13 @@
       width: 20px;
       height: 20px;
       color: var(--accent-cyan);
+      transition: var(--transition);
+    }
+
+    .skill-card:hover .skill-name-wrap i,
+    .skill-card.pointer-glowing .skill-name-wrap i {
+      filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.8));
+      transform: scale(1.12);
     }
 
     .skill-name {
@@ -966,11 +1114,16 @@
       width: 0%;
       border-radius: 999px;
       background: var(--gradient-primary);
-      transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
     }
 
     .skill-card.visible .skill-fill {
       width: 100%;
+    }
+
+    .skill-card:hover .skill-fill,
+    .skill-card.pointer-glowing .skill-fill {
+      box-shadow: 0 0 14px rgba(139, 92, 246, 0.7), 0 0 8px rgba(6, 182, 212, 0.6);
     }
 
     /* Portfolio Section */
@@ -999,7 +1152,7 @@
       background: var(--gradient-primary);
       border-color: transparent;
       color: #ffffff;
-      box-shadow: 0 8px 20px -6px rgba(139, 92, 246, 0.5);
+      box-shadow: 0 8px 24px -4px rgba(139, 92, 246, 0.6), 0 0 16px rgba(6, 182, 212, 0.35);
     }
 
     .portfolio-grid {
@@ -1033,7 +1186,8 @@
       transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .portfolio-card:hover .portfolio-thumb img {
+    .portfolio-card:hover .portfolio-thumb img,
+    .portfolio-card.pointer-glowing .portfolio-thumb img {
       transform: scale(1.08);
     }
 
@@ -1060,6 +1214,13 @@
       backdrop-filter: blur(8px);
       color: #67e8f9;
       border: 1px solid rgba(6, 182, 212, 0.4);
+      transition: var(--transition);
+    }
+
+    .portfolio-card:hover .concept-badge,
+    .portfolio-card.pointer-glowing .concept-badge {
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.5);
+      border-color: var(--accent-cyan);
     }
 
     .preview-icon-btn {
@@ -1074,9 +1235,11 @@
       transition: var(--transition);
     }
 
-    .portfolio-card:hover .preview-icon-btn {
+    .portfolio-card:hover .preview-icon-btn,
+    .portfolio-card.pointer-glowing .preview-icon-btn {
       background: var(--accent-purple);
       border-color: var(--accent-purple);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.75);
     }
 
     .portfolio-body {
@@ -1109,7 +1272,6 @@
     /* SA Creative Studio Dedicated Brand Section */
     .studio-banner {
       padding: 3.25rem;
-      position: relative;
       overflow: hidden;
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.14) 0%, rgba(13, 14, 23, 0.9) 50%, rgba(6, 182, 212, 0.14) 100%);
       border: 1px solid rgba(139, 92, 246, 0.35);
@@ -1147,6 +1309,14 @@
       font-size: 0.92rem;
       font-weight: 600;
       color: var(--text-primary);
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .pillar-item:hover {
+      background: rgba(6, 182, 212, 0.1);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.25);
     }
 
     .pillar-item i {
@@ -1162,6 +1332,12 @@
       background: rgba(7, 7, 13, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
+      transition: var(--transition);
+    }
+
+    .studio-identity-card:hover {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 32px rgba(139, 92, 246, 0.35), 0 0 18px rgba(6, 182, 212, 0.2);
     }
 
     .studio-identity-logo {
@@ -1176,6 +1352,12 @@
       font-size: 1.75rem;
       font-weight: 800;
       color: #fff;
+      transition: var(--transition);
+    }
+
+    .studio-identity-card:hover .studio-identity-logo {
+      box-shadow: 0 0 32px rgba(139, 92, 246, 0.7), 0 0 18px rgba(6, 182, 212, 0.45);
+      transform: scale(1.05);
     }
 
     .studio-identity-card h3 {
@@ -1220,6 +1402,15 @@
       display: grid;
       place-items: center;
       flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .why-card:hover .why-icon,
+    .why-card.pointer-glowing .why-icon {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.55), 0 0 12px rgba(139, 92, 246, 0.4);
+      transform: scale(1.06);
     }
 
     .why-card h3 {
@@ -1270,6 +1461,13 @@
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent-purple);
+      background: rgba(139, 92, 246, 0.08);
+      box-shadow: 0 0 22px rgba(139, 92, 246, 0.3), 0 0 12px rgba(6, 182, 212, 0.18);
     }
 
     .contact-item-icon {
@@ -1335,10 +1533,15 @@
       transition: var(--transition);
     }
 
+    .form-control:hover {
+      border-color: rgba(139, 92, 246, 0.45);
+      box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+    }
+
     .form-control:focus {
       outline: none;
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.16);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.18), 0 0 22px rgba(6, 182, 212, 0.3);
     }
 
     textarea.form-control {
@@ -1404,11 +1607,12 @@
     .footer-links a {
       font-size: 0.9rem;
       color: var(--text-secondary);
-      transition: color 0.25s ease;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
     }
 
     .footer-links a:hover {
       color: var(--accent-cyan);
+      text-shadow: 0 0 14px rgba(6, 182, 212, 0.65);
     }
 
     .footer-bottom {
@@ -1427,10 +1631,12 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
+      transition: var(--transition);
     }
 
     .footer-email:hover {
       color: var(--accent-cyan);
+      text-shadow: 0 0 14px rgba(6, 182, 212, 0.6);
     }
 
     /* Back to Top Button */
@@ -1463,6 +1669,7 @@
 
     .back-to-top:hover {
       transform: translateY(-4px);
+      box-shadow: 0 0 28px rgba(139, 92, 246, 0.75), 0 0 16px rgba(6, 182, 212, 0.55);
     }
 
     /* Lightbox Modal */
@@ -1490,10 +1697,10 @@
       width: 100%;
       max-width: 720px;
       background: #10121f;
-      border: 1px solid rgba(139, 92, 246, 0.4);
+      border: 1px solid rgba(139, 92, 246, 0.45);
       border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(139, 92, 246, 0.3);
       transform: scale(0.95);
       transition: transform 0.3s ease;
     }
@@ -1527,6 +1734,12 @@
       display: grid;
       place-items: center;
       cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background: var(--accent-purple);
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.7);
     }
 
     .modal-content {
@@ -1619,6 +1832,10 @@
         scroll-behavior: auto !important;
       }
 
+      .cursor-glow {
+        display: none;
+      }
+
       .reveal {
         opacity: 1;
         transform: none;
@@ -1631,6 +1848,9 @@
   </style>
 </head>
 <body>
+  <!-- Global Mouse / Finger Glowing Aura -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
   <!-- Preloader -->
   <div id="preloader" aria-hidden="true">
     <div class="loader-mark">SA</div>
@@ -1746,7 +1966,7 @@
 
         <!-- Animated Brand Visual Element -->
         <div class="hero-visual reveal">
-          <div class="studio-showcase">
+          <div class="studio-showcase glow-surface">
             <div class="showcase-ring"></div>
             <div class="showcase-ring-inner"></div>
 
@@ -1798,7 +2018,7 @@
         </div>
 
         <div class="about-grid">
-          <div class="glass-card about-story reveal">
+          <div class="glass-card glow-surface about-story reveal">
             <div>
               <h3>Hello! I'm Saif Ali</h3>
               <p style="margin-top: 0.75rem;">
@@ -1814,28 +2034,28 @@
           </div>
 
           <div class="about-details-grid reveal">
-            <div class="glass-card detail-card">
+            <div class="glass-card glow-surface detail-card">
               <div class="detail-icon"><i data-lucide="user"></i></div>
               <span class="detail-label">Name &amp; Brand</span>
               <div class="detail-value">Saif Ali</div>
               <p class="detail-note">Founder of SA Creative Studio</p>
             </div>
 
-            <div class="glass-card detail-card">
+            <div class="glass-card glow-surface detail-card">
               <div class="detail-icon"><i data-lucide="map-pin"></i></div>
               <span class="detail-label">Location</span>
               <div class="detail-value">Lahore, Pakistan</div>
               <p class="detail-note">Serving local &amp; remote clients</p>
             </div>
 
-            <div class="glass-card detail-card">
+            <div class="glass-card glow-surface detail-card">
               <div class="detail-icon"><i data-lucide="graduation-cap"></i></div>
               <span class="detail-label">Education</span>
               <div class="detail-value">Class 12 / Intermediate</div>
               <p class="detail-note">Academic studies &amp; digital skill development</p>
             </div>
 
-            <div class="glass-card detail-card">
+            <div class="glass-card glow-surface detail-card">
               <div class="detail-icon"><i data-lucide="compass"></i></div>
               <span class="detail-label">Core Focus</span>
               <div class="detail-value">Creative &amp; Digital</div>
@@ -1858,61 +2078,61 @@
         </div>
 
         <div class="services-grid">
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="palette"></i></div>
             <h3>1. Graphic Designing</h3>
             <p>Custom social media graphics, banners, flyers, posters, and clean visual layouts crafted to match your brand style.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="video"></i></div>
             <h3>2. Video Editing</h3>
             <p>Smooth cuts, engaging transitions, captions, and pacing for reels, shorts, promotional clips, and social video content.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="share-2"></i></div>
             <h3>3. Social Media Marketing</h3>
             <p>Structured content planning and platform-focused promotion strategies to build consistent visibility and audience engagement.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="sparkles"></i></div>
             <h3>4. Social Media Content Creation</h3>
             <p>Scroll-stopping visual posts, carousels, and short-form media designed specifically for modern social platforms.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="award"></i></div>
             <h3>5. Brand Promotion</h3>
             <p>Cohesive promotional visuals and messaging that highlight your products, services, and unique value proposition.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="megaphone"></i></div>
             <h3>6. Digital Advertising</h3>
             <p>Eye-catching ad creatives and campaign visuals built to capture attention across digital channels.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="trending-up"></i></div>
             <h3>7. Paid Promotion</h3>
             <p>Ad-ready creative assets and structured campaign setups designed to support targeted promotional reach.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="file-text"></i></div>
             <h3>8. Content Writing</h3>
             <p>Clear, engaging captions, promotional copy, and structured written content aligned with your brand voice.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="keyboard"></i></div>
             <h3>9. Typing Services</h3>
             <p>Fast, accurate document typing, formatting, and clean text transcription with careful attention to detail.</p>
           </article>
 
-          <article class="glass-card service-card reveal">
+          <article class="glass-card glow-surface service-card reveal">
             <div class="service-icon"><i data-lucide="database"></i></div>
             <h3>10. Data Entry</h3>
             <p>Organized spreadsheet updates, record management, and accurate data compilation handled with confidentiality.</p>
@@ -1933,7 +2153,7 @@
         </div>
 
         <div class="skills-grid">
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="pen-tool"></i>
@@ -1945,7 +2165,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="film"></i>
@@ -1957,7 +2177,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="layout-grid"></i>
@@ -1969,7 +2189,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="image"></i>
@@ -1981,7 +2201,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="megaphone"></i>
@@ -1993,7 +2213,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="target"></i>
@@ -2005,7 +2225,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="edit-3"></i>
@@ -2017,7 +2237,7 @@
             <div class="skill-track"><div class="skill-fill"></div></div>
           </div>
 
-          <div class="glass-card skill-card reveal">
+          <div class="glass-card glow-surface skill-card reveal">
             <div class="skill-top">
               <div class="skill-name-wrap">
                 <i data-lucide="table"></i>
@@ -2052,7 +2272,7 @@
 
         <div class="portfolio-grid" id="portfolioGrid">
           <!-- 1. Fashion Brand Promotion -->
-          <article class="glass-card portfolio-card reveal" data-category="marketing"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="marketing"
             data-title="Fashion Brand Promotion"
             data-tag="Sample Concept • Brand Promotion"
             data-desc="Editorial-style promotional visual concept designed for seasonal apparel launches, combining bold typography with clean product focus for social feeds."
@@ -2072,7 +2292,7 @@
           </article>
 
           <!-- 2. Social Media Post Design -->
-          <article class="glass-card portfolio-card reveal" data-category="design"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="design"
             data-title="Social Media Post Design"
             data-tag="Sample Concept • Content Creation"
             data-desc="Cohesive social media post and carousel design concept focused on visual hierarchy, readable typography, and consistent brand colors."
@@ -2092,7 +2312,7 @@
           </article>
 
           <!-- 3. Video Editing Concept -->
-          <article class="glass-card portfolio-card reveal" data-category="video"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="video"
             data-title="Video Editing Concept"
             data-tag="Sample Concept • Video Production"
             data-desc="Dynamic short-form video editing concept demonstrating clean timeline pacing, color balance, animated captions, and crisp transitions."
@@ -2112,7 +2332,7 @@
           </article>
 
           <!-- 4. Digital Marketing Campaign -->
-          <article class="glass-card portfolio-card reveal" data-category="marketing"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="marketing"
             data-title="Digital Marketing Campaign"
             data-tag="Sample Concept • Digital Marketing"
             data-desc="Multi-channel digital campaign concept aligning visual creatives, promotional copy, and audience targeting structure."
@@ -2132,7 +2352,7 @@
           </article>
 
           <!-- 5. Promotional Advertising Design -->
-          <article class="glass-card portfolio-card reveal" data-category="marketing"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="marketing"
             data-title="Promotional Advertising Design"
             data-tag="Sample Concept • Digital Advertising"
             data-desc="High-contrast promotional banner and paid ad creative concept engineered for immediate visual impact and clear call-to-action."
@@ -2152,7 +2372,7 @@
           </article>
 
           <!-- 6. Brand Identity Concept -->
-          <article class="glass-card portfolio-card reveal" data-category="design"
+          <article class="glass-card glow-surface portfolio-card reveal" data-category="design"
             data-title="Brand Identity Concept"
             data-tag="Sample Concept • Visual Identity"
             data-desc="Complete brand identity concept demonstrating logo mark exploration, typography pairing, and cohesive color system guidelines."
@@ -2177,7 +2397,7 @@
     <!-- G. SA Creative Studio Section -->
     <section id="studio">
       <div class="container">
-        <div class="glass-card studio-banner reveal">
+        <div class="glass-card glow-surface studio-banner reveal">
           <div class="studio-banner-grid">
             <div>
               <span class="section-badge">Brand Identity</span>
@@ -2239,7 +2459,7 @@
         </div>
 
         <div class="why-grid">
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="lightbulb"></i></div>
             <div>
               <h3>Creative Approach</h3>
@@ -2247,7 +2467,7 @@
             </div>
           </div>
 
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="eye"></i></div>
             <div>
               <h3>Attention to Detail</h3>
@@ -2255,7 +2475,7 @@
             </div>
           </div>
 
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="message-square"></i></div>
             <div>
               <h3>Clear Communication</h3>
@@ -2263,7 +2483,7 @@
             </div>
           </div>
 
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="shield-check"></i></div>
             <div>
               <h3>Focus on Quality</h3>
@@ -2271,7 +2491,7 @@
             </div>
           </div>
 
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="clock"></i></div>
             <div>
               <h3>Reliable Delivery</h3>
@@ -2279,7 +2499,7 @@
             </div>
           </div>
 
-          <div class="glass-card why-card reveal">
+          <div class="glass-card glow-surface why-card reveal">
             <div class="why-icon"><i data-lucide="trending-up"></i></div>
             <div>
               <h3>Continuous Learning</h3>
@@ -2302,7 +2522,7 @@
         </div>
 
         <div class="contact-grid">
-          <div class="glass-card contact-info-card reveal">
+          <div class="glass-card glow-surface contact-info-card reveal">
             <div>
               <h3>Contact Details</h3>
               <p style="margin-top: 0.4rem;">
@@ -2352,7 +2572,7 @@
             </a>
           </div>
 
-          <div class="glass-card contact-form-card reveal">
+          <div class="glass-card glow-surface contact-form-card reveal">
             <form id="contactForm" novalidate>
               <div class="form-grid">
                 <div class="form-group">
@@ -2479,6 +2699,67 @@
       });
       setTimeout(() => preloader && preloader.classList.add('hidden'), 1200);
 
+      // Mouse & Finger Glowing Effect Handler
+      const rootEl = document.documentElement;
+      const glowSurfaces = document.querySelectorAll('.glow-surface');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const updateSurfaceGlowAtPoint = (clientX, clientY, activeSurface = null) => {
+        if (prefersReducedMotion) return;
+
+        rootEl.style.setProperty('--pointer-x', `${clientX}px`);
+        rootEl.style.setProperty('--pointer-y', `${clientY}px`);
+        rootEl.style.setProperty('--pointer-active', '1');
+
+        glowSurfaces.forEach((surface) => {
+          const rect = surface.getBoundingClientRect();
+          const isInside =
+            activeSurface === surface ||
+            (clientX >= rect.left &&
+              clientX <= rect.right &&
+              clientY >= rect.top &&
+              clientY <= rect.bottom);
+
+          if (isInside) {
+            const localX = clientX - rect.left;
+            const localY = clientY - rect.top;
+            surface.style.setProperty('--card-x', `${localX}px`);
+            surface.style.setProperty('--card-y', `${localY}px`);
+            surface.classList.add('pointer-glowing');
+          } else {
+            surface.classList.remove('pointer-glowing');
+          }
+        });
+      };
+
+      const clearAllGlows = () => {
+        rootEl.style.setProperty('--pointer-active', '0');
+        glowSurfaces.forEach((surface) => surface.classList.remove('pointer-glowing'));
+      };
+
+      if (!prefersReducedMotion) {
+        document.addEventListener(
+          'pointermove',
+          (e) => {
+            const closestSurface = e.target && e.target.closest ? e.target.closest('.glow-surface') : null;
+            updateSurfaceGlowAtPoint(e.clientX, e.clientY, closestSurface);
+          },
+          { passive: true }
+        );
+
+        document.addEventListener(
+          'pointerdown',
+          (e) => {
+            const closestSurface = e.target && e.target.closest ? e.target.closest('.glow-surface') : null;
+            updateSurfaceGlowAtPoint(e.clientX, e.clientY, closestSurface);
+          },
+          { passive: true }
+        );
+
+        document.addEventListener('pointerleave', clearAllGlows);
+        window.addEventListener('blur', clearAllGlows);
+      }
+
       // Navbar, Scroll Progress & Back-to-Top
       const navbar = document.getElementById('navbar');
       const scrollProgress = document.getElementById('scrollProgress');
@@ -2564,8 +2845,6 @@
       let roleIdx = 0;
       let charIdx = roles[0].length;
       let isDeleting = false;
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       if (typedEl && !prefersReducedMotion) {
         const typeLoop = () => {
