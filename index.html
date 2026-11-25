@@ -1496,6 +1496,12 @@
       word-break: break-word;
     }
 
+    .contact-quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
     .contact-form-card {
       padding: 2.25rem;
     }
@@ -1624,6 +1630,13 @@
       gap: 1rem;
       font-size: 0.86rem;
       color: var(--text-muted);
+    }
+
+    .footer-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
     }
 
     .footer-email {
@@ -1802,7 +1815,8 @@
 
       .about-details-grid,
       .studio-pillars,
-      .form-grid {
+      .form-grid,
+      .contact-quick-actions {
         grid-template-columns: 1fr;
       }
 
@@ -2517,7 +2531,7 @@
           <span class="section-badge">Contact</span>
           <h2 class="section-title">Let's Work <span class="gradient-text">Together</span></h2>
           <p class="section-subtitle">
-            Have a project in mind or need creative and digital support? Reach out directly by email or use the message composer below.
+            Have a project in mind or need creative and digital support? Reach out directly by email, phone call, or use the message composer below.
           </p>
         </div>
 
@@ -2556,20 +2570,36 @@
               </div>
 
               <div class="contact-item">
+                <div class="contact-item-icon"><i data-lucide="phone"></i></div>
+                <div>
+                  <div class="contact-item-label">Phone / Dial</div>
+                  <a href="tel:+923420140184" class="contact-item-value" style="color: #67e8f9;">
+                    03420140184
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-item">
                 <div class="contact-item-icon"><i data-lucide="mail"></i></div>
                 <div>
                   <div class="contact-item-label">Email</div>
-                  <a href="mailto:saifali0011011@gmail.com" class="contact-item-value" style="color: #67e8f9;">
-                    saifali0011011@gmail.com
+                  <a href="mailto:saifali.creative@gmail.com" class="contact-item-value" style="color: #67e8f9;">
+                    saifali.creative@gmail.com
                   </a>
                 </div>
               </div>
             </div>
 
-            <a href="mailto:saifali0011011@gmail.com?subject=Project%20Inquiry%20-%20SA%20Creative%20Studio" class="btn btn-secondary" style="width: 100%;">
-              <i data-lucide="external-link" style="width: 17px; height: 17px;"></i>
-              <span>Open Direct Email</span>
-            </a>
+            <div class="contact-quick-actions">
+              <a href="tel:+923420140184" class="btn btn-secondary" style="width: 100%;">
+                <i data-lucide="phone-call" style="width: 17px; height: 17px;"></i>
+                <span>Call Now</span>
+              </a>
+              <a href="mailto:saifali.creative@gmail.com?subject=Project%20Inquiry%20-%20SA%20Creative%20Studio" class="btn btn-secondary" style="width: 100%;">
+                <i data-lucide="mail" style="width: 17px; height: 17px;"></i>
+                <span>Direct Email</span>
+              </a>
+            </div>
           </div>
 
           <div class="glass-card glow-surface contact-form-card reveal">
@@ -2601,15 +2631,19 @@
                   <i data-lucide="send" style="width: 17px; height: 17px;"></i>
                   <span>Send Message</span>
                 </button>
-                <a href="mailto:saifali0011011@gmail.com" class="btn btn-secondary">
+                <a href="mailto:saifali.creative@gmail.com" class="btn btn-secondary">
                   <i data-lucide="mail" style="width: 17px; height: 17px;"></i>
                   <span>Email Directly</span>
+                </a>
+                <a href="tel:+923420140184" class="btn btn-secondary">
+                  <i data-lucide="phone" style="width: 17px; height: 17px;"></i>
+                  <span>03420140184</span>
                 </a>
               </div>
 
               <p class="form-note">
                 <i data-lucide="info" style="width: 15px; height: 15px; flex-shrink: 0;"></i>
-                <span>Submitting opens your default email app pre-addressed to <strong>saifali0011011@gmail.com</strong> with your message ready to send.</span>
+                <span>Submitting opens your default email app pre-addressed to <strong>saifali.creative@gmail.com</strong> with your message ready to send.</span>
               </p>
 
               <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
@@ -2645,10 +2679,16 @@
 
       <div class="footer-bottom">
         <p>&copy; <span id="currentYear">2026</span> SA Creative Studio — Saif Ali. All rights reserved.</p>
-        <a href="mailto:saifali0011011@gmail.com" class="footer-email">
-          <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
-          <span>saifali0011011@gmail.com</span>
-        </a>
+        <div class="footer-contacts">
+          <a href="tel:+923420140184" class="footer-email">
+            <i data-lucide="phone" style="width: 16px; height: 16px;"></i>
+            <span>03420140184</span>
+          </a>
+          <a href="mailto:saifali.creative@gmail.com" class="footer-email">
+            <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+            <span>saifali.creative@gmail.com</span>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
@@ -2973,10 +3013,10 @@
           );
 
           formFeedback.innerHTML =
-            'Opening your email client to send your message to <strong>saifali0011011@gmail.com</strong>. If your email app does not open automatically, click <strong>Email Directly</strong>.';
+            'Opening your email client to send your message to <strong>saifali.creative@gmail.com</strong>. If your email app does not open automatically, click <strong>Email Directly</strong> or call <strong>03420140184</strong>.';
           formFeedback.classList.add('show');
 
-          window.location.href = `mailto:saifali0011011@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+          window.location.href = `mailto:saifali.creative@gmail.com?subject=${mailSubject}&body=${mailBody}`;
         });
       }
     });
